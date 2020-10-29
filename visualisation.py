@@ -141,3 +141,5 @@ plt.ylabel("Count")
 plt.xticks(slp_pos, slp_cols)
 plt.show()
 """
+
+#NORMALISATION AND STANDARDISATION
