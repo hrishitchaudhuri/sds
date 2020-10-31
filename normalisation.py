@@ -6,7 +6,8 @@ import statistics as st
 from math import pow
 import math
 
-df = pd.read_csv("heart_dataset.csv")
+FILE_PATH=str(os.getcwd()) + '\Data\heart.csv'
+df = pd.read_csv(FILE_PATH)
 print(df)
 
 #list of all the column headings
