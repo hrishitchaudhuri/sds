@@ -5,6 +5,7 @@ import matplotlib as plt
 import statistics as st
 from math import pow
 import math
+import os
 
 FILE_PATH=str(os.getcwd()) + '\Data\heart.csv'
 df = pd.read_csv(FILE_PATH)
