@@ -65,6 +65,14 @@ def plot_histogram(df, col):
     pyplt.title('Histogram for feature data')
     pyplt.show()
 
-
+#plot histograms for data in every column
 for columns in col_heads:
     plot_histogram(df_normal, columns)
+    
+#find the categorical variables from the histograms
+categorical_vars = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'thal', 'target']
+
+#plot histograms only for continuous variables
+for columns in col_heads:
+    if(columns not in categorical_vars):
+        plot_histogram(df_normal, columns)
