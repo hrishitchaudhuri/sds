@@ -62,7 +62,7 @@ def plot_histogram(df, col):
     # title and axis labels
     pyplt.xlabel(col)
     pyplt.ylabel('Frequency')
-    pyplt.title(col, 'data histogram')
+    pyplt.title('Histogram for feature data')
     pyplt.show()
 
 
