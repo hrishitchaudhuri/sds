@@ -9,7 +9,6 @@ import os
 
 FILE_PATH=str(os.getcwd()) + '\Data\heart.csv'
 df = pd.read_csv(FILE_PATH)
-print(df)
 
 #list of all the column headings
 col_heads = df.columns
@@ -28,12 +27,10 @@ normalized_data = []
 for col in col_heads:
     row = [((X - col_means[col]) / pow(col_variances[col], 0.5)) for X in df[col].tolist()]
     normalized_data.append(row)
-print(normalized_data)
 
 df_normal = pd.DataFrame(normalized_data, columns = list(range(0,1025)))
 df_normal = df_normal.transpose()
 df_normal.columns = col_heads
-print(df_normal)
 
 
 # graphical visualisation of normalized data
