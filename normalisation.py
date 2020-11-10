@@ -58,4 +58,4 @@ for columns in col_heads:
     if(columns not in categorical_vars):
         plot_normal(df_normal, columns)
 
-#age, trestbps, chol are approximately normally distributed, trestbps and chol with slightly extended tails
+#age, trestbps, chol and thalach are approximately normally distributed, trestbps and chol having slightly extended tails
