@@ -5,21 +5,22 @@ import statistics as st
 from math import pow
 import math
 import os
+import numpy as np
+from scipy.stats import norm
 
 FILE_PATH=str(os.getcwd()) + '\Data\heart.csv'
 df = pd.read_csv(FILE_PATH)
 
 #list of all the column headings
 col_heads = df.columns
-print(col_heads)
 
 #dictionary containing column heading as key and mean of all values in that column as value
 col_means = dict([(col, df[col].mean()) for col in col_heads])
-print(col_means)
+print("Means of respective columns: ", col_means)
 
 #dictionary containing column heading as key and variance of all values in that column as value
 col_variances = dict([(col, pow(df[col].std(), 2)) for col in col_heads])
-print(col_variances)
+print("Variances of respective columns: ",col_variances)
 
 #normalisation/ standardisation of all numeric data (using cumulative distribution for z-scores)
 normalized_data = []
@@ -31,44 +32,30 @@ df_normal = pd.DataFrame(normalized_data, columns = list(range(0,1025)))
 df_normal = df_normal.transpose()
 df_normal.columns = col_heads
 
-
-# graphical visualisation of normalized data
-def plot_histogram(df, col):
-    feature = [i for i in df[col]]
+#graphical visualisation of normalized data 
+def plot_normal(df, col):
+    feature=[i for i in df[col]]
     feature.sort()
-
-    quart3 = feature[math.floor(0.75 * len(feature))]
-    quart1 = feature[math.floor(0.25 * len(feature))]
-    IQR = quart3 - quart1
-
-    # Using Freedman-Diaconis Rule to calculate number of bins:
-    bns = math.floor(2 * IQR / (len(feature) ** (1 / 3)))
-
-    if (bns >= 5):
-        bns = bns
-    else:
-        bns = 5
-
-    df[col].hist(bins=bns)
-
-    # add a best fit line to the graph
-    line = mlab.normpdf(bns, col_means[col], pow(col_variances[col], 0.5))
-    plt.plot(bns, line, 'r--')
+    
+    plt.plot(feature, norm.pdf(feature, 0, 1), color = 'green', label = 'Normal curve')
 
     # title and axis labels
     plt.xlabel(col)
     plt.ylabel('Frequency')
-    plt.title('Histogram for feature data')
+    plt.title('Normal curve (bell shaped) for feature data')
+    
     plt.show()
 
-#plot histograms for data in every column
+#normal plots for normalized data in each column
 for columns in col_heads:
-    plot_histogram(df_normal, columns)
-    
+    plot_normal(df_normal, columns)
+
 #find the categorical variables from the histograms
 categorical_vars = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'thal', 'target']
 
-#plot histograms only for continuous variables
+#plot normal curves only for continuous variables
 for columns in col_heads:
     if(columns not in categorical_vars):
-        plot_histogram(df_normal, columns)
+        plot_normal(df_normal, columns)
+
+#age, trestbps, chol are approximately normally distributed, trestbps and chol with slightly extended tails
