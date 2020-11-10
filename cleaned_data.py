@@ -136,6 +136,12 @@ heart_data['restecg'].fillna(median_restecg, inplace=True)
 #checking if there are any missing values 
 heart_data.isnull().sum()
 
+#dropping rows w incorrect values
+
+heart_data.drop(heart_data[heart_data['thal'] < 1].index, inplace = True) 
+print(heart_data.shape)
+
+
 
 # In[48]:
 
