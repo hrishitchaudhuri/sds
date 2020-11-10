@@ -1,7 +1,6 @@
 import pandas as pd
-import matplotlib.pyplot as pyplt
+import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
-import matplotlib as plt
 import statistics as st
 from math import pow
 import math
@@ -57,10 +56,10 @@ def plot_histogram(df, col):
     plt.plot(bns, line, 'r--')
 
     # title and axis labels
-    pyplt.xlabel(col)
-    pyplt.ylabel('Frequency')
-    pyplt.title('Histogram for feature data')
-    pyplt.show()
+    plt.xlabel(col)
+    plt.ylabel('Frequency')
+    plt.title('Histogram for feature data')
+    plt.show()
 
 #plot histograms for data in every column
 for columns in col_heads:
